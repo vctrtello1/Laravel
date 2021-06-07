@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ResumeController extends Controller
 {
+
+    public function __construct()
+    {
+        // is necessary to be authentificated
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +22,10 @@ class ResumeController extends Controller
     public function index()
     {
         //
+        $resume = auth()->user()->resumes;
+        // a better version of var_dump
+        //dd($resume);
+        return view('resumes.index', compact('resume'));
     }
 
     /**
