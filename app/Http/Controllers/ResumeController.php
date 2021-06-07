@@ -38,7 +38,15 @@ class ResumeController extends Controller
     public function store(Request $request)
     {
         //
-        dd($request);
+        $user = auth()->user();
+        $resume = $user->resumes()->create([
+            'title' => $request['title'],
+            'name' => $user->name,
+            'email' => $user->email,
+            'about' => null
+        ]);
+
+        return response('Created resume');
     }
 
     /**
