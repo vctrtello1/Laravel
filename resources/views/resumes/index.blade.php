@@ -18,12 +18,13 @@
                         <div>
                             <a href="{{ route('resumes.edit',$item->id) }}" class="btn btn-primary">Edit</a>
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <div>
-                            <a href="{{ route('resumes.destroy',$item->id) }}" class="btn btn-danger">Delete</a>
+                        <div class="d-flex justify-content-end">
+                            <div>
+                                <a href="{{ route('resumes.destroy',$item->id) }}" class="btn btn-danger">Delete</a>
+                            </div>
                         </div>
                     </div>
+
                 </td>
             </tr>
 
