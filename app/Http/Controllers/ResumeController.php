@@ -57,7 +57,7 @@ class ResumeController extends Controller
             'about' => null
         ]);
 
-        return response('Created resume');
+        return redirect()->route('resumes.index');
     }
 
     /**
