@@ -66,7 +66,10 @@ class ResumeController extends Controller
             'about' => null
         ]);
 
-        return redirect()->route('resumes.index');
+        return redirect()->route('resumes.index')->with('alert', [
+            'type' => 'primary',
+            'message' => "$resume->title created successfully"
+        ]);
     }
 
     /**
