@@ -59,9 +59,9 @@
                             <input type="email"
                             class="form-control
                             @error('email') is-invalid @enderror"
-                            email="email"
+                            name="email"
                             value="{{ old('email') ?? $resume->email}}"
-                            autocomplete="email" autofocus>
+                            required autocomplete="email" autofocus>
 
                             @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -78,7 +78,7 @@
                             <input type="text"
                             class="form-control
                             @error('website') is-invalid @enderror"
-                            website="website"
+                            name="website"
                             value="{{ old('website') ?? $resume->website}}"
                             autocomplete="website" autofocus>
 

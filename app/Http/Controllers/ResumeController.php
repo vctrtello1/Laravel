@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Resume;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class ResumeController extends Controller
 {
@@ -102,16 +103,14 @@ class ResumeController extends Controller
     {
         //
         $data = $request->validate([
-            // declarar el tipo de datos que se van a usar
-            // revisar validacion de email como required
             'name' => 'required|string',
-            'email' => 'nullable|email',
+            'email' =>'required|email',
             'website' => 'nullable|url',
             'picture' => 'nullable|image',
             'about' => 'nullable|string',
-            'title' => Rule::unique('resumes')->where(function ($query) use ($resume){
-                return $query->where('user_id', $resume->user->id);
-            })->ignore($resume->id)
+            'title' => Rule::unique('resumes')
+            ->where(fn ($query) => $query->where('user_id', $resume->user->id))
+            ->ignore($resume->id)
         ]);
 
         dd($data);
