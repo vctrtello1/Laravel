@@ -6,6 +6,7 @@ use App\Models\Resume;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class ResumeController extends Controller
 {
@@ -113,7 +114,20 @@ class ResumeController extends Controller
             ->ignore($resume->id)
         ]);
 
-        dd($data);
+        if (array_key_exists('picture', $data)) {
+            $picture = $data['picture']->store('pictures', 'public');
+            // usar un tamanio estandar
+            Image::make(public_path("storage/$picture"))->fit(800, 800)->save();
+            $data['picture'] = $picture;
+        }
+
+        $resume->update($data);
+        //dd($data);
+        // redireccionar a la ruta con alert
+        return redirect()->route('resumes.index')->with('alert', [
+            'type' => 'success',
+            'message' => "$resume->title updated successfully"
+        ]);
     }
 
     /**
